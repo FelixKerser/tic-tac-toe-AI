@@ -1,3 +1,6 @@
+#29.01.2020
+#по шаблону доделать ИИ и все варианты ходов
+
 import random
 from tkinter import *
 import os
