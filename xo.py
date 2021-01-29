@@ -16,4 +16,7 @@ frame1.place(relx=0.15, rely=0, relwidth=0.7, relheight=0.05)
 labeltop = Label(frame1, text='X - you  O - bot')
 labeltop.pack(side=TOP)
 
+frame2 = Frame(root, bg = '#C1A8E1')
+frame2.place(relx=0.15, rely=0.2, relwidth=0.7, relheight=0.6)
+
 root.mainloop()
