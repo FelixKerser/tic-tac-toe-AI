@@ -45,31 +45,17 @@ center_bottom = False
 left_bottom = False
 right_bottom = False
 
+first_tactic = True
+
 def move_ai_first():
     global first_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
     first_move = True
     #move
-    if center_center != True:
-        bot_center_center = True
-        button_center_center.place_forget()
-        button_center_center_x = Label(frame2, text='O', font=80)
-        button_center_center_x.place(relx=0.47, rely=0.5)
-    else:
-        if left_top != True:
-            bot_left_top = True
-            button_left_top.place_forget()
-            button_left_top_x = Label(frame2, text='O', font=80)
-            button_left_top_x.place(relx=0.15, rely=0.2)
-
-def move_ai_second():
-    global first_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
-    first_move = True
-    #move
-    if left_center != True:
-        bot_left_center = True
-        button_left_center.place_forget()
-        button_left_center_x = Label(frame2, text='O', font=80)
-        button_left_center_x.place(relx=0.15, rely=0.5)
+    if left_top != True:
+        bot_left_top = True
+        button_left_top.place_forget()
+        button_left_top_x = Label(frame2, text='O', font=80)
+        button_left_top_x.place(relx=0.15, rely=0.2)
     else:
         if left_bottom != True:
             bot_left_bottom = True
@@ -77,102 +63,177 @@ def move_ai_second():
             button_left_bottom_x = Label(frame2, text='O', font=80)
             button_left_bottom_x.place(relx=0.15, rely=0.8)
 
+def move_ai_second():
+    global second_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
+    second_move = True
+    #move
+    if left_bottom != True:
+        bot_left_bottom = True
+        button_left_bottom.place_forget()
+        button_left_bottom_x = Label(frame2, text='O', font=80)
+        button_left_bottom_x.place(relx=0.15, rely=0.8)
+    else:
+        if center_bottom != True:
+            bot_center_bottom = True
+            button_center_bottom.place_forget()
+            button_center_bottom_x = Label(frame2, text='O', font=80)
+            button_center_bottom_x.place(relx=0.47, rely=0.8)
+
+def move_ai_third():
+    global third_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
+    third_move = True
+    #move
+    if left_center != True:
+        bot_left_center = True
+        button_left_center.place_forget()
+        button_left_center_x = Label(frame2, text='O', font=80)
+        button_left_center_x.place(relx=0.15, rely=0.5)
+    else:
+        if center_bottom != True:
+            bot_center_bottom = True
+            button_center_bottom.place_forget()
+            button_center_bottom_x = Label(frame2, text='O', font=80)
+            button_center_bottom_x.place(relx=0.47, rely=0.8)
+        else:
+            if right_top != True:
+                bot_right_top = True
+                button_right_top.place_forget()
+                button_right_top_x = Label(frame2, text='O', font=80)
+                button_right_top_x.place(relx=0.8, rely=0.2)
+                
+you_win = False
+bot_win = False
+
 def check_win():
-    global center_top, right_top, left_top, left_center, left_bottom, center_center, right_center, center_bottom, right_bottom,\
+    global you_win, bot_win, center_top, right_top, left_top, left_center, left_bottom, center_center, right_center, center_bottom, right_bottom,\
      bot_center_top, bot_right_top, bot_left_top, bot_left_center, bot_left_bottom, bot_center_center, bot_right_center, bot_center_bottom, bot_right_bottom
     #win player
     if left_top and center_top and right_top == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     if left_top and left_center and left_bottom == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     if left_center and center_center and right_center == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     if left_bottom and center_bottom and right_bottom == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     if right_top and right_center and right_bottom == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     if center_top and center_center and center_bottom == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     if left_top and center_center and right_bottom == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     if right_top and center_top and left_bottom == True:
+        you_win = True
         winletter = Label(frame2, text="You win!", font=70)
         winletter.pack(side='bottom')
 
     #win bot
     if bot_left_top and bot_center_top and bot_right_top == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
     if bot_left_top and bot_left_center and bot_left_bottom == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
     if bot_left_center and bot_center_center and bot_right_center == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
     if bot_left_bottom and bot_center_bottom and bot_right_bottom == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
     if bot_right_top and bot_right_center and bot_right_bottom == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
     if bot_center_top and bot_center_center and bot_center_bottom == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
     if bot_left_top and bot_center_center and bot_right_bottom == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
     if bot_right_top and bot_center_top and bot_left_bottom == True:
-        winletter = Label(frame2, text="You win!", font=70)
+        bot_win = True
+        winletter = Label(frame2, text="Bot win...", font=70)
         winletter.pack(side='bottom')
 
+first = True
+second = True
+third = True
+fourth = True
 
 def check_move():
-    global first_move, second_move, third_move, fourth_move, fifth_move
-    if first_move == True:
-        first = False
-    else:
-        move_ai_first()
-    if first == False:
-        if second_move == True:
+    global first_move, second_move, third_move, fourth_move, fifth_move, first, second, third, fourth
+    while True:
+        if first_move == True:
+            first = False
+        else:
+            move_ai_first()
+            break
+
+        if first == False:
+            second = False
+            if second_move == True:
+                pass
+            else:
+                move_ai_second()
+                break
+
+        if second == False:
+            third = False
+            if third_move == True:
+                pass
+            else:
+                move_ai_third()
+                check_win()
+                break
+
+        if third_move == True:
             pass
         else:
-            move_ai_second()
+            pass
 
-    if third_move == True:
-        pass
-    else:
-        pass
+        if fourth_move == True:
+            pass
+        else:
+            pass
 
-    if fourth_move == True:
-        pass
-    else:
-        pass
-
-    if fifth_move == True:
-        pass
-    else:
-        pass
+        if fifth_move == True:
+            pass
+        else:
+            pass
 
 
 #top
