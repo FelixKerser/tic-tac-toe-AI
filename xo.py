@@ -62,44 +62,156 @@ def move_ai_first():
             button_left_bottom.place_forget()
             button_left_bottom_x = Label(frame2, text='O', font=80)
             button_left_bottom_x.place(relx=0.15, rely=0.8)
+        else:
+            if right_center != True:
+                bot_right_center = True
+                button_right_center.place_forget()
+                button_right_center_x = Label(frame2, text='O', font=80)
+                button_right_center_x.place(relx=0.8, rely=0.5)
 
 def move_ai_second():
     global second_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
     second_move = True
     #move
-    if left_bottom != True:
-        bot_left_bottom = True
-        button_left_bottom.place_forget()
-        button_left_bottom_x = Label(frame2, text='O', font=80)
-        button_left_bottom_x.place(relx=0.15, rely=0.8)
+    if left_center and center_center == True:
+        if bot_right_center != True:
+            bot_right_center = True
+            button_right_center.place_forget()
+            button_right_center_x = Label(frame2, text='O', font=80)
+            button_right_center_x.place(relx=0.8, rely=0.5)
     else:
-        if center_bottom != True:
-            bot_center_bottom = True
-            button_center_bottom.place_forget()
-            button_center_bottom_x = Label(frame2, text='O', font=80)
-            button_center_bottom_x.place(relx=0.47, rely=0.8)
+        if right_center and center_center == True:
+            bot_left_center = True
+            button_left_center.place_forget()
+            button_left_center_x = Label(frame2, text='O', font=80)
+            button_left_center_x.place(relx=0.15, rely=0.5)
+        else:
+            if left_bottom and bot_left_bottom != True:
+                bot_left_bottom = True
+                button_left_bottom.place_forget()
+                button_left_bottom_x = Label(frame2, text='O', font=80)
+                button_left_bottom_x.place(relx=0.15, rely=0.8)
+            else:
+                if center_bottom != True:
+                    bot_center_bottom = True
+                    button_center_bottom.place_forget()
+                    button_center_bottom_x = Label(frame2, text='O', font=80)
+                    button_center_bottom_x.place(relx=0.47, rely=0.8)
+                else:
+                    if right_bottom != True:
+                        bot_right_bottom = True
+                        button_right_bottom.place_forget()
+                        button_right_bottom_x = Label(frame2, text='O', font=80)
+                        button_right_bottom_x.place(relx=0.8, rely=0.8)
+                    else:
+                        if right_top != True:
+                            bot_right_top = True
+                            bot_right_top = True
+                            button_right_top.place_forget()
+                            button_right_top_x = Label(frame2, text='O', font=80)
+                            button_right_top_x.place(relx=0.8, rely=0.2)
+
 
 def move_ai_third():
     global third_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
     third_move = True
     #move
-    if left_center != True:
-        bot_left_center = True
-        button_left_center.place_forget()
-        button_left_center_x = Label(frame2, text='O', font=80)
-        button_left_center_x.place(relx=0.15, rely=0.5)
+    if right_top != True:
+        if bot_left_top == True:
+            bot_right_top = True
+            button_right_top.place_forget()
+            button_right_top_x = Label(frame2, text='O', font=80)
+            button_right_top_x.place(relx=0.8, rely=0.2)
     else:
-        if center_bottom != True:
-            bot_center_bottom = True
-            button_center_bottom.place_forget()
-            button_center_bottom_x = Label(frame2, text='O', font=80)
-            button_center_bottom_x.place(relx=0.47, rely=0.8)
+        if left_bottom != True:
+            if bot_left_top or bot_left_center == True:    
+                bot_left_bottom = True
+                button_left_bottom.place_forget()
+                button_left_bottom_x = Label(frame2, text='O', font=80)
+                button_left_bottom_x.place(relx=0.15, rely=0.8)
         else:
-            if right_top != True:
-                bot_right_top = True
-                button_right_top.place_forget()
-                button_right_top_x = Label(frame2, text='O', font=80)
-                button_right_top_x.place(relx=0.8, rely=0.2)
+            if center_bottom != True:
+                if bot_left_bottom or bot_right_bottom == True:    
+                        bot_center_bottom = True
+                        button_center_bottom.place_forget()
+                        button_center_bottom_x = Label(frame2, text='O', font=80)
+                        button_center_bottom_x.place(relx=0.47, rely=0.8)
+            else:
+                if bot_left_bottom or bot_center_bottom == True:
+                    if right_bottom != True:
+                        bot_right_bottom = True
+                        button_right_bottom.place_forget()
+                        button_right_bottom_x = Label(frame2, text='O', font=80)
+                        button_right_bottom_x.place(relx=0.8, rely=0.8)
+                else:
+                    if right_top and bot_right_top != True:
+                                bot_right_top = True
+                                button_right_top.place_forget()
+                                button_right_top_x = Label(frame2, text='O', font=80)
+                                button_right_top_x.place(relx=0.8, rely=0.2)
+                    else:
+                        if center_bottom and bot_center_bottom != True:
+                            bot_center_bottom = True
+                            button_center_bottom.place_forget()
+                            button_center_bottom_x = Label(frame2, text='O', font=80)
+                            button_center_bottom_x.place(relx=0.47, rely=0.8)
+                        else:
+                            if left_center and bot_left_center != True:
+                                bot_left_center = True
+                                button_left_center.place_forget()
+                                button_left_center_x = Label(frame2, text='O', font=80)
+                                button_left_center_x.place(relx=0.15, rely=0.5)
+                            else:
+                                if right_bottom and bot_right_bottom != True:
+                                    bot_right_bottom = True
+                                    button_right_bottom.place_forget()
+                                    button_right_bottom_x = Label(frame2, text='O', font=80)
+                                    button_right_bottom_x.place(relx=0.8, rely=0.8)
+
+def move_ai_fourth():
+    global fourth_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
+    fourth_move = True
+    #move
+    if center_top != True:
+        bot_center_top = True
+        button_center_top.place_forget()
+        button_center_top_x = Label(frame2, text='O', font=80)
+        button_center_top_x.place(relx=0.47, rely=0.2)
+    else:
+        if right_bottom != True:
+            bot_right_bottom = True
+            button_right_bottom.place_forget()
+            button_right_bottom_x = Label(frame2, text='O', font=80)
+            button_right_bottom_x.place(relx=0.8, rely=0.8)
+        else:
+            if right_center != True:
+                bot_right_center = True
+                button_right_center.place_forget()
+                button_right_center_x = Label(frame2, text='O', font=80)
+                button_right_center_x.place(relx=0.8, rely=0.5)
+
+def move_ai_fifth():
+    global fifth_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
+    fifth_move = True
+    #move
+    if center_top != True:
+        bot_center_top = True
+        button_center_top.place_forget()
+        button_center_top_x = Label(frame2, text='O', font=80)
+        button_center_top_x.place(relx=0.47, rely=0.2)
+    
+    else:
+        if right_center != True:
+            bot_right_center = True
+            button_right_center.place_forget()
+            button_right_center_x = Label(frame2, text='O', font=80)
+            button_right_center_x.place(relx=0.8, rely=0.5)
+        else:
+            if center_bottom != True:
+                bot_center_bottom = True
+                button_center_bottom.place_forget()
+                button_center_bottom_x = Label(frame2, text='O', font=80)
+                button_center_bottom_x.place(relx=0.47, rely=0.8)
                 
 you_win = False
 bot_win = False
@@ -219,21 +331,23 @@ def check_move():
                 move_ai_third()
                 check_win()
                 break
+        if third == False:
+            fourth = False
+            if fourth_move == True:
+                pass
+            else:
+                move_ai_fourth()
+                check_win()
+                break
+        if fourth == False:
+            fifth = True
+            if fifth_move == True:
+                pass
+            else:
+                move_ai_fourth()
+                check_win()
+                break
 
-        if third_move == True:
-            pass
-        else:
-            pass
-
-        if fourth_move == True:
-            pass
-        else:
-            pass
-
-        if fifth_move == True:
-            pass
-        else:
-            pass
 
 
 #top
