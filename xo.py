@@ -4,6 +4,9 @@
 #30.01.2020
 #продолжения хода бота, по какой-то причине просто отказывается ходить. Скорее всего проблема в условиях
 
+#07.2.2020
+#бот может выиграть просто так, и по каким-то причинам не ходит, сделать тестирования
+
 import random
 from tkinter import *
 import os
@@ -24,6 +27,10 @@ labeltop.pack(side=TOP)
 
 frame2 = Frame(root, bg = '#C1A8E1')
 frame2.place(relx=0.15, rely=0.2, relwidth=0.7, relheight=0.6)
+
+you_win = False
+bot_win = False
+nobody_win = False
 
 bot_left_top = False
 bot_center_top = False
@@ -86,7 +93,7 @@ def move_ai_second():
             button_left_center_x = Label(frame2, text='O', font=80)
             button_left_center_x.place(relx=0.15, rely=0.5)
         else:
-            if left_bottom and bot_left_bottom != True:
+            if left_bottom != True:
                 bot_left_bottom = True
                 button_left_bottom.place_forget()
                 button_left_bottom_x = Label(frame2, text='O', font=80)
@@ -132,10 +139,10 @@ def move_ai_third():
         else:
             if center_bottom != True:
                 if bot_left_bottom or bot_right_bottom == True:    
-                        bot_center_bottom = True
-                        button_center_bottom.place_forget()
-                        button_center_bottom_x = Label(frame2, text='O', font=80)
-                        button_center_bottom_x.place(relx=0.47, rely=0.8)
+                    bot_center_bottom = True
+                    button_center_bottom.place_forget()
+                    button_center_bottom_x = Label(frame2, text='O', font=80)
+                    button_center_bottom_x.place(relx=0.47, rely=0.8)
             else:
                 if bot_left_bottom or bot_center_bottom == True:
                     if right_bottom != True:
@@ -145,10 +152,10 @@ def move_ai_third():
                         button_right_bottom_x.place(relx=0.8, rely=0.8)
                 else:
                     if right_top and bot_right_top != True:
-                                bot_right_top = True
-                                button_right_top.place_forget()
-                                button_right_top_x = Label(frame2, text='O', font=80)
-                                button_right_top_x.place(relx=0.8, rely=0.2)
+                        bot_right_top = True
+                        button_right_top.place_forget()
+                        button_right_top_x = Label(frame2, text='O', font=80)
+                        button_right_top_x.place(relx=0.8, rely=0.2)
                     else:
                         if center_bottom and bot_center_bottom != True:
                             bot_center_bottom = True
@@ -171,6 +178,9 @@ def move_ai_third():
 def move_ai_fourth():
     global fourth_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
     fourth_move = True
+    if you_win and bot_win != True:
+        winletter = Label(frame2, text="Nobody win", font=70)
+        winletter.pack(side='bottom')
     #move
     if center_top != True:
         bot_center_top = True
@@ -184,7 +194,7 @@ def move_ai_fourth():
             button_right_bottom_x = Label(frame2, text='O', font=80)
             button_right_bottom_x.place(relx=0.8, rely=0.8)
         else:
-            if right_center != True:
+            if right_center and bot_right_center != True:
                 bot_right_center = True
                 button_right_center.place_forget()
                 button_right_center_x = Label(frame2, text='O', font=80)
@@ -193,6 +203,9 @@ def move_ai_fourth():
 def move_ai_fifth():
     global fifth_move, bot_left_top, bot_center_top, bot_right_top, bot_left_center, bot_center_center, bot_right_center, bot_center_bottom, bot_left_bottom, bot_right_bottom
     fifth_move = True
+    if you_win and bot_win != True:
+        winletter = Label(frame2, text="Nobody win", font=70)
+        winletter.pack(side='bottom')
     #move
     if center_top != True:
         bot_center_top = True
@@ -213,93 +226,94 @@ def move_ai_fifth():
                 button_center_bottom_x = Label(frame2, text='O', font=80)
                 button_center_bottom_x.place(relx=0.47, rely=0.8)
                 
-you_win = False
-bot_win = False
+
 
 def check_win():
-    global you_win, bot_win, center_top, right_top, left_top, left_center, left_bottom, center_center, right_center, center_bottom, right_bottom,\
+    global you_win, nobody_win, bot_win, center_top, right_top, left_top, left_center, left_bottom, center_center, right_center, center_bottom, right_bottom,\
      bot_center_top, bot_right_top, bot_left_top, bot_left_center, bot_left_bottom, bot_center_center, bot_right_center, bot_center_bottom, bot_right_bottom
     #win player
-    if left_top and center_top and right_top == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+    if you_win == False:
+        if left_top and center_top and right_top == True:
+            you_win = True
+            winletter = Label(frame2, text="You win!", font=70)
+            winletter.pack(side='bottom')
+        else:
+            if left_top and left_center and left_bottom == True:
+                you_win = True
+                winletter = Label(frame2, text="You win!", font=70)
+                winletter.pack(side='bottom')
+            else:
+                if left_center and center_center and right_center == True:
+                    you_win = True
+                    winletter = Label(frame2, text="You win!", font=70)
+                    winletter.pack(side='bottom')
+                else:
+                    if left_bottom and center_bottom and right_bottom == True:
+                        you_win = True
+                        winletter = Label(frame2, text="You win!", font=70)
+                        winletter.pack(side='bottom')
+                    else:
+                        if right_top and right_center and right_bottom == True:
+                            you_win = True
+                            winletter = Label(frame2, text="You win!", font=70)
+                            winletter.pack(side='bottom')
+                        else:
+                            if center_top and center_center and center_bottom == True:
+                                you_win = True
+                                winletter = Label(frame2, text="You win!", font=70)
+                                winletter.pack(side='bottom')
+                            else:
+                                if left_top and center_center and right_bottom == True:
+                                    you_win = True
+                                    winletter = Label(frame2, text="You win!", font=70)
+                                    winletter.pack(side='bottom')
+                                else:
+                                    if right_top and center_top and left_bottom == True:
+                                        you_win = True
+                                        winletter = Label(frame2, text="You win!", font=70)
+                                        winletter.pack(side='bottom')
 
-    if left_top and left_center and left_bottom == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+    if bot_win == False:
+        #win bot
+        if bot_left_top and bot_center_top and bot_right_top == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
-    if left_center and center_center and right_center == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+        if bot_left_top and bot_left_center and bot_left_bottom == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
-    if left_bottom and center_bottom and right_bottom == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+        if bot_left_center and bot_center_center and bot_right_center == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
-    if right_top and right_center and right_bottom == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+        if bot_left_bottom and bot_center_bottom and bot_right_bottom == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
-    if center_top and center_center and center_bottom == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+        if bot_right_top and bot_right_center and bot_right_bottom == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
-    if left_top and center_center and right_bottom == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+        if bot_center_top and bot_center_center and bot_center_bottom == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
-    if right_top and center_top and left_bottom == True:
-        you_win = True
-        winletter = Label(frame2, text="You win!", font=70)
-        winletter.pack(side='bottom')
+        if bot_left_top and bot_center_center and bot_right_bottom == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
-    #win bot
-    if bot_left_top and bot_center_top and bot_right_top == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
-
-    if bot_left_top and bot_left_center and bot_left_bottom == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
-
-    if bot_left_center and bot_center_center and bot_right_center == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
-
-    if bot_left_bottom and bot_center_bottom and bot_right_bottom == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
-
-    if bot_right_top and bot_right_center and bot_right_bottom == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
-
-    if bot_center_top and bot_center_center and bot_center_bottom == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
-
-    if bot_left_top and bot_center_center and bot_right_bottom == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
-
-    if bot_right_top and bot_center_top and bot_left_bottom == True:
-        bot_win = True
-        winletter = Label(frame2, text="Bot win...", font=70)
-        winletter.pack(side='bottom')
+        if bot_right_top and bot_center_top and bot_left_bottom == True:
+            bot_win = True
+            winletter = Label(frame2, text="Bot win...", font=70)
+            winletter.pack(side='bottom')
 
 first = True
 second = True
@@ -439,10 +453,6 @@ second_move = False
 third_move = False
 fourth_move = False
 fifth_move = False
-
-
-        
-
 
 
 #top
